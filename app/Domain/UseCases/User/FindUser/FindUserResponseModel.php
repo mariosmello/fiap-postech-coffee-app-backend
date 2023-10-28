@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\UseCases\CreateUser;
+namespace App\Domain\UseCases\User\FindUser;
 
 use App\Domain\Interfaces\UserEntity;
 
-class CreateUserResponseModel
+class FindUserResponseModel
 {
     public function __construct(
         private UserEntity $user

@@ -39,10 +39,19 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app
             ->when(HttpControllers\CreateUserController::class)
-            ->needs(UseCases\CreateUser\CreateUserInputPort::class)
+            ->needs(UseCases\User\CreateUser\CreateUserInputPort::class)
             ->give(function ($app) {
-                return $app->make(UseCases\CreateUser\CreateUserInteractor::class, [
+                return $app->make(UseCases\User\CreateUser\CreateUserInteractor::class, [
                     'output' => $app->make(Presenters\CreateUserJsonPresenter::class),
+                ]);
+            });
+
+        $this->app
+            ->when(HttpControllers\IndexUserController::class)
+            ->needs(UseCases\User\FindUser\FindUserInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\User\FindUser\FindUserInteractor::class, [
+                    'output' => $app->make(Presenters\FindUserJsonPresenter::class),
                 ]);
             });
 

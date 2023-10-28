@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Domain\Interfaces\UserEntity;
 use App\Domain\Interfaces\UserRepository;
-use App\Models\PasswordValueObject;
 use App\Models\User;
 
 class UserDatabaseRepository implements UserRepository
@@ -12,17 +11,24 @@ class UserDatabaseRepository implements UserRepository
     public function exists(UserEntity $user): bool
     {
         return User::where([
-            'name' => $user->getName(),
             'email' => (string) $user->getEmail(),
         ])->exists();
     }
 
-    public function create(UserEntity $user, PasswordValueObject $password): UserEntity
+    public function findByDocument(UserEntity $user): UserEntity
+    {
+        return User::where([
+            'document' => (string) $user->getDocument(),
+        ])->firstOrFail();
+    }
+
+    public function create(UserEntity $user): UserEntity
     {
         return User::create([
             'name' => $user->getName(),
             'email' => $user->getEmail(),
-            'password' => $password,
+            'document' => $user->getDocument(),
+            'phone' => $user->getPhone(),
         ]);
     }
 }

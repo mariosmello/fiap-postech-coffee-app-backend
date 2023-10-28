@@ -23,6 +23,7 @@ class UserCreatedResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->user->getId(),
             'name' => $this->user->getName(),
             'email' => $this->user->getEmail()
         ];

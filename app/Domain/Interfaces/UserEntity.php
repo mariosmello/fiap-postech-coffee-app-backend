@@ -2,11 +2,10 @@
 
 namespace App\Domain\Interfaces;
 
-use App\Models\HashedPasswordValueObject;
-use App\Models\PasswordValueObject;
-
 interface UserEntity
 {
+    public function getId(): int;
+
     public function getName(): string;
 
     public function setName(string $name): void;
@@ -15,7 +14,11 @@ interface UserEntity
 
     public function setEmail(string $email): void;
 
-    public function getPassword(): HashedPasswordValueObject;
+    public function getDocument(): string;
 
-    public function setPassword(PasswordValueObject $password): void;
+    public function setDocument(string $document): void;
+
+    public function getPhone(): string;
+
+    public function setPhone(string $phone): void;
 }

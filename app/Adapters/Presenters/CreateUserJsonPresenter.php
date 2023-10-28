@@ -4,8 +4,8 @@ namespace App\Adapters\Presenters;
 
 use App\Adapters\ViewModels\JsonResourceViewModel;
 use App\Domain\Interfaces\ViewModel;
-use App\Domain\UseCases\CreateUser\CreateUserOutputPort;
-use App\Domain\UseCases\CreateUser\CreateUserResponseModel;
+use App\Domain\UseCases\User\CreateUser\CreateUserOutputPort;
+use App\Domain\UseCases\User\CreateUser\CreateUserResponseModel;
 use App\Http\Resources\UnableToCreateResource;
 use App\Http\Resources\UserAlreadyExistsResource;
 use App\Http\Resources\UserCreatedResource;

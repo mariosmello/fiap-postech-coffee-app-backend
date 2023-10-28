@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Domain\Interfaces\UserEntity;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,38 +12,29 @@ class User extends Authenticatable implements UserEntity
     use HasFactory;
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'name',
         'email',
+        'document',
+        'phone',
         'password',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array<string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
     // -----------------------------------------------------------------------
     // UserEntity methods
+
+    public function getId(): int
+    {
+        return $this->attributes['id'];
+    }
 
     public function getName(): string
     {
@@ -66,40 +56,23 @@ class User extends Authenticatable implements UserEntity
         $this->attributes['email'] = $email;
     }
 
-    public function getPassword(): HashedPasswordValueObject
+    public function getDocument(): string
     {
-        return new HashedPasswordValueObject($this->attributes['password']);
+        return $this->attributes['document'];
     }
 
-    public function setPassword(PasswordValueObject $password): void
+    public function setDocument(string $document): void
     {
-        $this->attributes['password'] = (string) $password->hashed();
+        $this->attributes['document'] = $document;
     }
 
-    // -----------------------------------------------------------------------
-    // Mutators
-    //
-    // @todo replace these methods with value object casting
-    // @see https://laravel.com/docs/8.x/eloquent-mutators#value-object-casting
-    //
-
-    public function getEmailAttribute():string
+    public function getPhone(): string
     {
-        return $this->attributes['email'];
+        return $this->attributes['phone'];
     }
 
-    public function setEmailAttribute(string $email): void
+    public function setPhone(string $phone): void
     {
-        $this->setEmail($email);
-    }
-
-    public function getPasswordAttribute(): HashedPasswordValueObject
-    {
-        return new HashedPasswordValueObject($this->attributes['password']);
-    }
-
-    public function setPasswordAttribute(PasswordValueObject $password): void
-    {
-        $this->setPassword($password);
+        $this->attributes['phone'] = $phone;
     }
 }

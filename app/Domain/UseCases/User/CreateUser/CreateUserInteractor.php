@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domain\UseCases\CreateUser;
+namespace App\Domain\UseCases\User\CreateUser;
 
 use App\Domain\Interfaces\UserFactory;
 use App\Domain\Interfaces\UserRepository;
 use App\Domain\Interfaces\ViewModel;
-use App\Models\PasswordValueObject;
 
 class CreateUserInteractor implements CreateUserInputPort
 {
@@ -21,6 +20,8 @@ class CreateUserInteractor implements CreateUserInputPort
         $user = $this->factory->make([
             'name' => $request->getName(),
             'email' => $request->getEmail(),
+            'phone' => $request->getPhone(),
+            'document' => $request->getDocument(),
         ]);
 
         if ($this->repository->exists($user)) {
@@ -28,7 +29,7 @@ class CreateUserInteractor implements CreateUserInputPort
         }
 
         try {
-            $user = $this->repository->create($user, new PasswordValueObject($request->getPassword()));
+            $user = $this->repository->create($user);
         } catch (\Exception $e) {
             return $this->output->unableToCreateUser(new CreateUserResponseModel($user), $e);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\UseCases\CreateUser;
+namespace App\Domain\UseCases\User\CreateUser;
 
 class CreateUserRequestModel
 {
@@ -22,8 +22,13 @@ class CreateUserRequestModel
         return $this->attributes['email'] ?? '';
     }
 
-    public function getPassword(): string
+    public function getPhone(): string
     {
-        return $this->attributes['password'] ?? '';
+        return $this->attributes['phone'] ?? '';
+    }
+
+    public function getDocument(): string
+    {
+        return $this->attributes['document'] ?? '';
     }
 }

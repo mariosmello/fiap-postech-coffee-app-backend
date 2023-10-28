@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\UseCases\CreateUser;
+namespace App\Domain\UseCases\User\CreateUser;
 
 use App\Domain\Interfaces\ViewModel;
 
