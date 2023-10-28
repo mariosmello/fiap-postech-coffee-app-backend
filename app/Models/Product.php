@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Domain\Interfaces\ProductEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model implements ProductEntity
 {
@@ -55,11 +54,11 @@ class Product extends Model implements ProductEntity
 
     public function getPrice(): float
     {
-        return $this->attributes['price'] / 100;
+        return $this->attributes['price'];
     }
 
     public function setPrice(float $price): void
     {
-        $this->attributes['price'] = $price * 100;
+        $this->attributes['price'] = $price;
     }
 }

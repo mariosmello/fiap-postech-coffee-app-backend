@@ -65,6 +65,15 @@ class AppServiceProvider extends ServiceProvider
             });
 
         $this->app
+            ->when(HttpControllers\IndexProductController::class)
+            ->needs(UseCases\Product\FindProduct\FindProductInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\Product\FindProduct\FindProductInteractor::class, [
+                    'output' => $app->make(Presenters\FindProductJsonPresenter::class),
+                ]);
+            });
+
+        $this->app
             ->when(HttpControllers\DeleteProductController::class)
             ->needs(UseCases\Product\DeleteProduct\DeleteProductInputPort::class)
             ->give(function ($app) {

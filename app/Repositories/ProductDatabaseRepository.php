@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Domain\Interfaces\ProductEntity;
 use App\Domain\Interfaces\ProductRepository;
 use App\Models\Product;
+use Illuminate\Support\Collection;
 
 class ProductDatabaseRepository implements ProductRepository
 {
@@ -13,6 +14,13 @@ class ProductDatabaseRepository implements ProductRepository
         return Product::where([
             'name' => $product->getName(),
         ])->exists();
+    }
+
+    public function findByCategory(ProductEntity $product): Collection
+    {
+        return Product::where([
+            'category_id' => $product->getCategory(),
+        ])->orderBy('name')->get();
     }
 
     public function create(ProductEntity $product): ProductEntity

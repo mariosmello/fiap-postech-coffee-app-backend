@@ -17,6 +17,7 @@ use App\Http\Controllers;
 Route::get('user', Controllers\IndexUserController::class)->name('user.index');
 Route::post('user', Controllers\CreateUserController::class)->name('user.store');
 
+Route::get('product', Controllers\IndexProductController::class)->name('product.index');
 Route::post('product', Controllers\CreateProductController::class)->name('product.store');
 Route::put('product/{product}', Controllers\UpdateProductController::class)->name('product.update');
 Route::delete('product/{product}', Controllers\DeleteProductController::class)->name('product.delete');

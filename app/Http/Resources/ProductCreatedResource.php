@@ -19,6 +19,8 @@ class ProductCreatedResource extends JsonResource
         return [
             'id' => $this->product->getId(),
             'name' => $this->product->getName(),
+            'description' => $this->product->getDescription(),
+            'price' => $this->product->getPrice(),
         ];
     }
 }
