@@ -14,13 +14,17 @@ class ProductCreatedResource extends JsonResource
         $this->product = $product;
     }
 
-    public function toArray($request)
+    public function toArray($request = [])
     {
+        $category = new CategoryResource($this->product->category()->first());
+        $category = $category->toArray();
+
         return [
             'id' => $this->product->getId(),
             'name' => $this->product->getName(),
             'description' => $this->product->getDescription(),
             'price' => $this->product->getPrice(),
+            'category' => $category,
         ];
     }
 }

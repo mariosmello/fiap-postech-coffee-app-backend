@@ -28,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            Domain\Interfaces\OrderFactory::class,
+            Factories\OrderModelFactory::class,
+        );
+
+        $this->app->bind(
             Domain\Interfaces\UserRepository::class,
             Repositories\UserDatabaseRepository::class,
         );
@@ -35,6 +40,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             Domain\Interfaces\ProductRepository::class,
             Repositories\ProductDatabaseRepository::class,
+        );
+
+        $this->app->bind(
+            Domain\Interfaces\OrderRepository::class,
+            Repositories\OrderDatabaseRepository::class,
         );
 
         $this->app
@@ -88,6 +98,24 @@ class AppServiceProvider extends ServiceProvider
             ->give(function ($app) {
                 return $app->make(UseCases\Product\UpdateProduct\UpdateProductInteractor::class, [
                     'output' => $app->make(Presenters\UpdateProductJsonPresenter::class),
+                ]);
+            });
+
+        $this->app
+            ->when(HttpControllers\CreateOrderController::class)
+            ->needs(UseCases\Order\CreateOrder\CreateOrderInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\Order\CreateOrder\CreateOrderInteractor::class, [
+                    'output' => $app->make(Presenters\CreateOrderJsonPresenter::class),
+                ]);
+            });
+
+        $this->app
+            ->when(HttpControllers\IndexOrderController::class)
+            ->needs(UseCases\Order\FindOrder\FindOrderInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\Order\FindOrder\FindOrderInteractor::class, [
+                    'output' => $app->make(Presenters\FindOrderJsonPresenter::class),
                 ]);
             });
     }
