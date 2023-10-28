@@ -6,7 +6,7 @@ use App\Adapters\ViewModels\JsonResourceViewModel;
 use App\Domain\Interfaces\ViewModel;
 use App\Domain\UseCases\CreateUser\CreateUserOutputPort;
 use App\Domain\UseCases\CreateUser\CreateUserResponseModel;
-use App\Http\Resources\UnableToCreateUserResource;
+use App\Http\Resources\UnableToCreateResource;
 use App\Http\Resources\UserAlreadyExistsResource;
 use App\Http\Resources\UserCreatedResource;
 
@@ -34,7 +34,7 @@ class CreateUserJsonPresenter implements CreateUserOutputPort
         }
 
         return new JsonResourceViewModel(
-            new UnableToCreateUserResource($e)
+            new UnableToCreateResource($e)
         );
     }
 }

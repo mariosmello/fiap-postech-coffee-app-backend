@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UnableToCreateUserResource extends JsonResource
+class UnableToCreateResource extends JsonResource
 {
     protected \Throwable $e;
 
@@ -13,12 +13,6 @@ class UnableToCreateUserResource extends JsonResource
         $this->e = $e;
     }
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function toArray($request)
     {
         return [

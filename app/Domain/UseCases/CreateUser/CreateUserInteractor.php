@@ -2,12 +2,10 @@
 
 namespace App\Domain\UseCases\CreateUser;
 
-use App\Domain\Interfaces\UserEntity;
 use App\Domain\Interfaces\UserFactory;
 use App\Domain\Interfaces\UserRepository;
 use App\Domain\Interfaces\ViewModel;
 use App\Models\PasswordValueObject;
-use App\Domain\UseCases\CreateUser\CreateUserInputPort;
 
 class CreateUserInteractor implements CreateUserInputPort
 {
