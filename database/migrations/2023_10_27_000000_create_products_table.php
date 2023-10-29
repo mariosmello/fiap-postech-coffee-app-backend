@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->decimal('price');
             $table->softDeletes();
             $table->timestamps();
