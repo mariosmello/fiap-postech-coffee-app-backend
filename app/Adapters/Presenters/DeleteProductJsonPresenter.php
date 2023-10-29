@@ -14,7 +14,7 @@ class DeleteProductJsonPresenter implements DeleteProductOutputPort
     public function productDeleted(DeleteProductResponseModel $model): ViewModel
     {
         return new JsonResourceViewModel(
-            new ProductDeletedResource($model->getProduct())
+            new ProductDeletedResource($model->getProduct()), 'Produto deletado com sucesso'
         );
     }
 

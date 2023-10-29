@@ -15,7 +15,7 @@ class UpdateProductJsonPresenter implements UpdateProductOutputPort
     public function productUpdated(UpdateProductResponseModel $model): ViewModel
     {
         return new JsonResourceViewModel(
-            new ProductCreatedResource($model->getProduct())
+            new ProductCreatedResource($model->getProduct()), 'Produto editado com sucesso'
         );
     }
 
