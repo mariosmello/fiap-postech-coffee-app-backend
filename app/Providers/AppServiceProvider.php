@@ -118,6 +118,15 @@ class AppServiceProvider extends ServiceProvider
                     'output' => $app->make(Presenters\FindOrderJsonPresenter::class),
                 ]);
             });
+
+        $this->app
+            ->when(HttpControllers\ShowOrderController::class)
+            ->needs(UseCases\Order\ShowOrder\ShowOrderInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\Order\ShowOrder\ShowOrderInteractor::class, [
+                    'output' => $app->make(Presenters\ShowOrderJsonPresenter::class),
+                ]);
+            });
     }
 
     /**

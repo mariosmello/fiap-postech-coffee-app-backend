@@ -22,5 +22,6 @@ Route::post('product', Controllers\CreateProductController::class)->name('produc
 Route::put('product/{product}', Controllers\UpdateProductController::class)->name('product.update');
 Route::delete('product/{product}', Controllers\DeleteProductController::class)->name('product.delete');
 
-Route::get('order', Controllers\IndexOrderController::class)->name('index.store');
+Route::get('order', Controllers\IndexOrderController::class)->name('order.index');
+Route::get('order/{order}', Controllers\ShowOrderController::class)->name('order.show');
 Route::post('order', Controllers\CreateOrderController::class)->name('order.store');

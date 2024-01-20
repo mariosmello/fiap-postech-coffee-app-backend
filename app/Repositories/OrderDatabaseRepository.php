@@ -42,4 +42,9 @@ class OrderDatabaseRepository implements OrderRepository
         return Order::orderBy('created_at', 'desc')->get();
     }
 
+    public function show(OrderEntity $order): OrderEntity
+    {
+        return Order::where('id', $order->getId())->firstOrFail();
+    }
+
 }
