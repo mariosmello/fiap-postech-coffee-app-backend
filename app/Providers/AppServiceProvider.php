@@ -129,6 +129,15 @@ class AppServiceProvider extends ServiceProvider
             });
 
         $this->app
+            ->when(HttpControllers\UpdateOrderController::class)
+            ->needs(UseCases\Order\UpdateOrder\UpdateOrderInputPort::class)
+            ->give(function ($app) {
+                return $app->make(UseCases\Order\UpdateOrder\UpdateOrderInteractor::class, [
+                    'output' => $app->make(Presenters\UpdateOrderJsonPresenter::class),
+                ]);
+            });
+
+        $this->app
             ->when(HttpControllers\WebhookUpdateOrderController::class)
             ->needs(UseCases\Order\UpdateOrder\UpdateOrderInputPort::class)
             ->give(function ($app) {
