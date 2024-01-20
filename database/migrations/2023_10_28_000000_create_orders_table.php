@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->enum('status', ['received','in_preparation','ready','completed'])->default('received');
-            $table->enum('payment_status', ['pending','paid'])->default('pending');
+            $table->enum('payment_status', ['pending','paid', 'denied'])->default('pending');
             $table->decimal('price')->nullable();
             $table->timestamps();
         });

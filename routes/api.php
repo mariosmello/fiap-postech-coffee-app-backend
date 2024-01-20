@@ -25,3 +25,6 @@ Route::delete('product/{product}', Controllers\DeleteProductController::class)->
 Route::get('order', Controllers\IndexOrderController::class)->name('order.index');
 Route::get('order/{order}', Controllers\ShowOrderController::class)->name('order.show');
 Route::post('order', Controllers\CreateOrderController::class)->name('order.store');
+
+
+Route::put('webhook/order/{order}', Controllers\WebhookUpdateOrderController::class)->name('webhook.order.update');

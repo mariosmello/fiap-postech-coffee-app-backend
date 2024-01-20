@@ -47,4 +47,11 @@ class OrderDatabaseRepository implements OrderRepository
         return Order::where('id', $order->getId())->firstOrFail();
     }
 
+    public function update(OrderEntity $order): OrderEntity
+    {
+        $order->save();
+
+        return $order;
+    }
+
 }
