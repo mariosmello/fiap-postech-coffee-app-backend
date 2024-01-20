@@ -32,7 +32,6 @@ class OrderDatabaseRepository implements OrderRepository
         }
 
         $order->price = $price;
-        $order->payment_status = 'paid'; //@todo fake checkout
         $order->save();
 
         return Order::findOrFail($order->id);
