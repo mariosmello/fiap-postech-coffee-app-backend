@@ -39,7 +39,10 @@ class OrderDatabaseRepository implements OrderRepository
 
     public function find(OrderEntity $order): Collection
     {
-        return Order::orderBy('created_at', 'desc')->get();
+        return Order::where('status', '<>', 'completed')
+            ->orderByRaw('FIELD(status, "ready", "in_preparation", "received")')
+            ->orderBy('created_at', 'asc')
+            ->get();
     }
 
     public function show(OrderEntity $order): OrderEntity
