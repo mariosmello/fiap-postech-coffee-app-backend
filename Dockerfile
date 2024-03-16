@@ -43,3 +43,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY --chown=www-data:www . /var/www/html
 
 EXPOSE 80
+CMD ["apache2ctl", "-D", "FOREGROUND"]
