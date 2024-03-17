@@ -11,7 +11,6 @@ env:
   GKE_CLUSTER: test-cluster
   GKE_ZONE: us-east1
   IMAGE: app
-  IMAGE_TAG: v1
   GAR_ZONE: us-east1
   GAR_REPO: fiap-postech-coffee-app
 
@@ -35,7 +34,7 @@ jobs:
           gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$GAR_ZONE-docker.pkg.dev
 
       - name: Set up GKE credentials
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
@@ -44,17 +43,18 @@ jobs:
       - name: Build
         run: |-
           docker build \
-            --tag "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG" \
+            --tag "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
-          docker push "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$IMAGE_TAG"
+          docker push "$GAR_ZONE-docker.pkg.dev/$PROJECT_ID/$GAR_REPO/$IMAGE:$GITHUB_SHA"
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |-
+          kubectl delete --all deployments
           kubectl apply -f ./deployment/api.yaml
           kubectl get pods
