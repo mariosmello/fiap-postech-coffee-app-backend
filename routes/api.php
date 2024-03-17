@@ -14,18 +14,19 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('user', Controllers\IndexUserController::class)->name('user.index');
 Route::post('user', Controllers\CreateUserController::class)->name('user.store');
 
-Route::get('product', Controllers\IndexProductController::class)->name('product.index');
-Route::post('product', Controllers\CreateProductController::class)->name('product.store');
-Route::put('product/{product}', Controllers\UpdateProductController::class)->name('product.update');
-Route::delete('product/{product}', Controllers\DeleteProductController::class)->name('product.delete');
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', Controllers\IndexUserController::class)->name('user.index');
+    Route::get('product', Controllers\IndexProductController::class)->name('product.index');
+    Route::post('product', Controllers\CreateProductController::class)->name('product.store');
+    Route::put('product/{product}', Controllers\UpdateProductController::class)->name('product.update');
+    Route::delete('product/{product}', Controllers\DeleteProductController::class)->name('product.delete');
 
-Route::get('order', Controllers\IndexOrderController::class)->name('order.index');
-Route::get('order/{order}', Controllers\ShowOrderController::class)->name('order.show');
-Route::post('order', Controllers\CreateOrderController::class)->name('order.store');
-Route::put('order/{order}', Controllers\UpdateOrderController::class)->name('order.update');
-
+    Route::get('order', Controllers\IndexOrderController::class)->name('order.index');
+    Route::get('order/{order}', Controllers\ShowOrderController::class)->name('order.show');
+    Route::post('order', Controllers\CreateOrderController::class)->name('order.store');
+    Route::put('order/{order}', Controllers\UpdateOrderController::class)->name('order.update');
+});
 
 Route::put('webhook/order/{order}', Controllers\WebhookUpdateOrderController::class)->name('webhook.order.update');

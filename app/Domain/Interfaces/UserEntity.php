@@ -21,4 +21,9 @@ interface UserEntity
     public function getPhone(): string;
 
     public function setPhone(string $phone): void;
+
+    public function setPassword(string $password): void;
+
+    public function getPassword(): string;
+
 }
