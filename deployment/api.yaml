@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  template:
+    metadata:
+      name: api
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api-container
+          image: us-east1-docker.pkg.dev/postech-417415/fiap-postech-coffee-app/app:v1
+          imagePullPolicy: Always
+          command: [ 'sh', '-c', 'echo The Pod is running && composer install && php artisan key:generate && php artisan migrate --seed && apache2-foreground' ]
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: host
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: database
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: password
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
