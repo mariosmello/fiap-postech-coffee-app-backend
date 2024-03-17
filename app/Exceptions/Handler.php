@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return response()->json([
-                'message' => 'Não encontrado'
+                'message' => 'Not Found'
             ], 404);
         });
     }
