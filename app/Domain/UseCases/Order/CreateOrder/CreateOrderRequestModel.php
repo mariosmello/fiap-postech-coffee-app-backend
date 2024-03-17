@@ -9,7 +9,7 @@ class CreateOrderRequestModel
 
     public function getUser(): ?int
     {
-        return $this->attributes['user_id'] ?? null;
+        return auth('api')->user()->getAuthIdentifier();
     }
 
     public function getProducts(): array

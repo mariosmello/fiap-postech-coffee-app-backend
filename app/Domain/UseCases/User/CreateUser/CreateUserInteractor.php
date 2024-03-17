@@ -22,6 +22,7 @@ class CreateUserInteractor implements CreateUserInputPort
             'email' => $request->getEmail(),
             'phone' => $request->getPhone(),
             'document' => $request->getDocument(),
+            'password' => $request->getPassword(),
         ]);
 
         if ($this->repository->exists($user)) {

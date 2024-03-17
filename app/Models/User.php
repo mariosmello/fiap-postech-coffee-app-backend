@@ -6,8 +6,10 @@ use App\Domain\Interfaces\UserEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements UserEntity
+class User extends Authenticatable implements UserEntity, JWTSubject
 {
     use HasFactory;
     use Notifiable;
@@ -29,6 +31,17 @@ class User extends Authenticatable implements UserEntity
     ];
 
     // -----------------------------------------------------------------------
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     // UserEntity methods
 
     public function getId(): int
@@ -74,5 +87,15 @@ class User extends Authenticatable implements UserEntity
     public function setPhone(string $phone): void
     {
         $this->attributes['phone'] = $phone;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->attributes['password'];
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->attributes['password'] = $password;
     }
 }

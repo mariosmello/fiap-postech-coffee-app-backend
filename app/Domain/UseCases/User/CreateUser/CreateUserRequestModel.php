@@ -31,4 +31,9 @@ class CreateUserRequestModel
     {
         return $this->attributes['document'] ?? '';
     }
+
+    public function getPassword(): string
+    {
+        return $this->attributes['password'] ?? '';
+    }
 }

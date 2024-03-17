@@ -29,6 +29,7 @@ class UserDatabaseRepository implements UserRepository
             'email' => $user->getEmail(),
             'document' => $user->getDocument(),
             'phone' => $user->getPhone(),
+            'password' => $user->getPassword(),
         ]);
     }
 }

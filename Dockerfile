@@ -41,5 +41,7 @@ ARG COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --chown=www-data:www . /var/www/html
+COPY --chown=www-data:www .env.example /var/www/html/.env
 
 EXPOSE 80
+CMD ["apache2ctl", "-D", "FOREGROUND"]

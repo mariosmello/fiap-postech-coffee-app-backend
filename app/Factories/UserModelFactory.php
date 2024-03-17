@@ -4,8 +4,8 @@ namespace App\Factories;
 
 use App\Domain\Interfaces\UserEntity;
 use App\Domain\Interfaces\UserFactory;
-use App\Models\PasswordValueObject;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserModelFactory implements UserFactory
 {
@@ -13,7 +13,7 @@ class UserModelFactory implements UserFactory
     {
 
         if (isset($attributes['password']) && is_string($attributes['password'])) {
-            $attributes['password'] = new PasswordValueObject($attributes['password']);
+            $attributes['password'] = Hash::make($attributes['password']);
         }
 
         return new User($attributes);
