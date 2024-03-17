@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use Spatie\Health\Http\Controllers\HealthCheckJsonResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use App\Http\Controllers;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::get('', HealthCheckJsonResultsController::class);
 
 Route::post('user', Controllers\CreateUserController::class)->name('user.store');
 

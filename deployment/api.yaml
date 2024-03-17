@@ -39,6 +39,11 @@ spec:
                 secretKeyRef:
                   name: dbsecret
                   key: password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt
+                  key: secret
   replicas: 1
   selector:
     matchLabels:
