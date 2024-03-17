@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: api-container
-          image: us-east1-docker.pkg.dev/postech-417415/fiap-postech-coffee-app/app:v1
+          image: us-east1-docker.pkg.dev/postech-417415/fiap-postech-coffee-app/app:latest
           imagePullPolicy: Always
           command: [ 'sh', '-c', 'echo The Pod is running && composer install && php artisan key:generate && php artisan migrate --seed && apache2-foreground' ]
           ports:
